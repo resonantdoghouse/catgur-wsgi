@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+	{% block title %}
+		Profile
+	{% endblock %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	<div class="alert alert-danger" role="alert">
+	{% for message in messages %}
+		<strong>{{ message }}</strong>
+	{% endfor %}
+	</div>
+{% endif %}
+{% endwith %}
+<!--
+<div class="row">
+	<h2>Profile</h2>
+</div> -->
+
+<div class="row">
+
+	<div class="col-lg-2">
+	<h3>{{ user.username }}</h3>
+	<img src="{{ user.picture}}" class="user-photo">
+
+	</div>
+
+	<div class="col-lg-9">
+	<h3>My Cats</h3>
+
+	<div class="card-columns">
+	{% for cat in mycats %}
+
+	<div class="card" >
+		<a href="{{ url_for('showCat', id=cat.id) }}">
+		  <img class="card-img-top img-fluid" src="/static/img/{{ cat.image }}" alt="Card image cap">
+		  <div class="card-block">
+		    <h4 class="card-title">{{ cat.name }}</h4>
+		    <p class="card-text">{{ cat.description|truncate(100) }}</p>
+		    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+		  </div>
+		</a>
+	</div>
+
+
+	{% endfor %}
+</div>
+	</div>
+
+
+
+
+
+</div>
+
+{% endblock %}

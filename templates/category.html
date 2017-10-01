@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block title %}Category {% endblock %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	<div class="alert alert-success" role="alert">
+	{% for message in messages %}
+		{{ message }}
+	{% endfor %}
+	</div>
+{% endif %}
+{% endwith %}
+
+<h4>{{ category.name }}</h4>
+<p>{{ category.description }}</p>
+
+<div class="row">
+
+  <div class="card-columns">
+
+  {% for id, cat in category_cats %}
+  <div class="card">
+		<a href="{{ url_for('showCat', id=id.id) }}">
+	    <h3>{{ id.name }}</h3>
+	    <img class="card-img-top img-fluid" src="/static/img/{{ id.image }}">
+	    <p class="card-text">{{ id.description|truncate(100) }}</p>
+		</a>
+  </div>
+  {% endfor %}
+
+  </div>
+
+
+</div>
+
+{% endblock %}

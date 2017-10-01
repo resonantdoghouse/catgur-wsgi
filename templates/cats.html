@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %}Cats{% endblock %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	<div class="alert alert-success" role="alert">
+	{% for message in messages %}
+		{{ message }}
+	{% endfor %}
+	</div>
+{% endif %}
+{% endwith %}
+
+
+<div class="row">
+
+	<div class="col-lg-9">
+
+		<div class="card-columns">
+			{% for cat in cats if cats != [] %}
+				<div class="card">
+					<a href="{{ url_for('showCat', id=cat.id) }}">
+						<img class="card-img-top img-fluid" src="/static/img/{{ cat.image }}" alt="cat {{ cat.name }}">
+						<div class="card-block">
+							<h4 class="card-title">{{ cat.name }}</h4>
+							<p class="card-text">{{ cat.description|truncate(100) }}</p>
+							<p class="card-text">
+								<small class="text-muted">
+									Category <strong>{{ cat.category_name }}</strong>
+								</small>
+							</p>
+						</div>
+					</a>
+				</div>
+				{% else %}
+				<div class="card">
+					<a href="{{ url_for('newCat')}}">
+					<div class="bg-info text-white">
+						No cats here yet, why not login to add a mew cats of your own <i class="fa fa-paw" aria-hidden="true"></i>
+					</div>
+					</a>
+				</div>
+
+		  {% endfor %}
+		</div>
+
+
+
+
+
+
+	</div>
+
+	<div class="col-lg-3 list-group">
+
+	{% for id, category in category_count %}
+		<a href="/category/{{ id.id }}" class="list-group-item list-group-item-action flex-column
+			 align-items-start">
+			 <div class="d-flex w-100 justify-content-between">
+				 <h5 class="mb-1">{{ id.name }}</h5>
+				 <small>{{ category }} {{ id.name }}('s)</small>
+			</div>
+			<p class="mb-1">{{ id.description }}</p>
+    	<small>View {{ id.name }}('s)</small>
+		</a>
+	{% endfor %}
+
+	</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}Delete Cat?!!!{% endblock %}
+{% block content %}
+
+	<div class="center-align">
+		<h4> Are you sure you want to delete {{ cat.name }}? </h4>
+
+		<form action="#" method = 'post'>
+
+			<button class="btn btn-danger" type='submit' value='Delete Cat'>
+				Delete Cat
+			</button>
+
+			<a class="btn btn-primary" href = '{{url_for('showCat', id=cat.id)}}'> Cancel </a>
+
+		</form>
+	</div>
+
+	<br><br>
+
+
+{% endblock %}

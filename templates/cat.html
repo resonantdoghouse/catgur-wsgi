@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Cat {% endblock %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+	<div class="alert alert-success" role="alert">
+	{% for message in messages %}
+		{{ message }}
+	{% endfor %}
+	</div>
+{% endif %}
+{% endwith %}
+
+
+<div class="row">
+
+  <div class="col-lg-6">
+		<img class="img-fluid rounded" src="/static/img/{{ cat.image }}">
+  </div>
+
+  <div class="col-lg-6">
+    <h3>{{ cat.name }}</h3>
+
+    <p>{{ cat.description }}</p>
+		<p>{{ cat.category }}</p>
+
+
+		<a class="btn btn-primary" href="{{url_for('editCat', id = cat.id)}}">Edit Cat</a>
+		<a class="btn btn-danger" href="{{url_for('deleteCat', id = cat.id)}}">Delete Cat</a>
+
+
+  </div>
+
+
+</div>
+
+{% endblock %}

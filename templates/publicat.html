@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Cat {% endblock %}
+{% block content %}
+
+
+<div class="row">
+
+  <div class="col-lg-6">
+		<img class="img-fluid" src="/static/img/{{ cat.image }}">
+  </div>
+
+  <div class="col-lg-6">
+    <h3>{{ cat.name }}</h3>
+
+    <p>{{ cat.description }}</p>
+		<p>{{ cat.category }}</p>
+
+
+  </div>
+
+
+</div>
+
+{% endblock %}
